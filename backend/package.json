@@ -3,19 +3,27 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "jest --runInBand --forceExit",
+    "start": "node server.js",
+    "postinstall": "npx prisma generate"
   },
   "author": "Siddhant Kore",
   "license": "ISC",
   "description": "",
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 15000
+  },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jest": "^30.5.1",
     "pg": "^8.23.0",
     "prisma": "^7.10.0",
-    "supertest": "^7.2.2"
+    "supertest": "^7.2.2",
+    "zod": "^4.6.2"
   }
 }

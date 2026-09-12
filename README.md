@@ -169,6 +169,25 @@ npm run dev
 
 The UI will be available at `http://localhost:5173`.
 
+### Features
+
+- **Employee table** — shows name, department, role, manager name, and active/inactive badge
+- **Search bar** — live filter by name (debounced via state)
+- **Department dropdown** — filter by department
+- **Add Employee** button — opens a modal form
+- **Edit** button per row — opens pre-filled modal form
+- **Delete** button per row — confirmation dialog then removes
+- **Loading / Error states** — "Loading…" while fetching, error message on failure
+
+### Components
+
+| Component | Description |
+|---|---|
+| `App.jsx` | Root — holds all state, fetches data, opens/closes modal |
+| `EmployeeTable.jsx` | Reusable table — receives employees array + callbacks as props |
+| `EmployeeForm.jsx` | Reusable modal form — works for both Add and Edit; client-side validation |
+| `api/employeeApi.js` | All fetch calls isolated here — `getEmployees`, `createEmployee`, `updateEmployee`, `deleteEmployee` |
+
 ---
 
 ## Running Frontend Tests
@@ -177,6 +196,24 @@ The UI will be available at `http://localhost:5173`.
 cd frontend
 npm test
 ```
+
+Tests use **React Testing Library + Jest** and cover:
+
+**EmployeeTable tests:**
+- Renders correct number of rows given mock data
+- Displays employee name, department, role
+- Shows manager name when present / dash when absent
+- Renders Edit and Delete buttons per row
+- Shows empty message when array is empty
+
+**EmployeeForm tests:**
+- Shows all validation errors on empty submit
+- Shows invalid email error
+- Does NOT call `onSubmit` when validation fails
+- Calls `onSubmit` with correct payload on valid form
+- Displays server-side API error
+- Pre-fills fields in edit mode
+- Calls `onClose` when Cancel is clicked
 
 ---
 

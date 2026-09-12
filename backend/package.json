@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --runInBand --forceExit",
     "start": "node server.js",
-    "postinstall": "npx prisma generate"
+    "dev": "node server.js"
   },
   "author": "Siddhant Kore",
   "license": "ISC",

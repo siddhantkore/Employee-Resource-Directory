@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Employee {
+  id         Int        @id @default(autoincrement())
+  name       String     @db.VarChar(100)
+  email      String     @unique @db.VarChar(150)
+  department String     @db.VarChar(50)
+  role       String     @db.VarChar(50)
+  managerId  Int?       @map("manager_id")
+  status     String     @default("active") @db.VarChar(20)
+  createdAt  DateTime   @default(now()) @map("created_at")
+
+  // Self-referencing relationship
+  manager    Employee?  @relation("ManagerToReports", fields: [managerId], references: [id], onDelete: SetNull)
+  reports    Employee[] @relation("ManagerToReports")
+
+  @@map("employees")
+}
